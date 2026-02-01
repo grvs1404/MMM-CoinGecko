@@ -1,2 +1,16 @@
-# CoinWatcher
-A lightweight MagicMirror module that displays cryptocurrency prices using the CoinGecko API. No API key required. Supports multiple coins, 24h change, and clean defaults.
+# MMM-CoinGecko
+
+MagicMirror² module to display cryptocurrency prices using CoinGecko.
+
+## Configuration
+
+```js
+{
+  module: "MMM-CoinGecko",
+  position: "top_right",
+  config: {
+    coins: ["bitcoin", "ethereum"],
+    vsCurrency: "usd"
+  }
+}
+```

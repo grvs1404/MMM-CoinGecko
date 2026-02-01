@@ -1,0 +1,10 @@
+{
+  "name": "mmm-coingecko",
+  "version": "1.0.0",
+  "description": "MagicMirror² module to display cryptocurrency prices using CoinGecko",
+  "main": "MMM-CoinGecko.js",
+  "author": "Community",
+  "license": "MIT",
+  "keywords": ["magicmirror", "magicmirror2", "coingecko", "crypto"],
+  "dependencies": {}
+}
