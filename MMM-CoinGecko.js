@@ -2,10 +2,12 @@
 
 Module.register("MMM-CoinGecko", {
   defaults: {
-    header: "Crypto",
+    header: "CryptoCoins",
     coins: ["bitcoin", "ethereum"],
     vsCurrency: "usd",
     show24hChange: true,
+    changePeriods: ["1h", "24h", "7d", "30d"],
+    showHeaders: true,
     updateInterval: 5 * 60 * 1000,
     retryDelay: 30 * 1000,
     apiBase: "https://api.coingecko.com/api/v3",
@@ -93,6 +95,58 @@ Module.register("MMM-CoinGecko", {
     const table = document.createElement("table");
     table.className = "small coingecko-table";
 
+    if (this.config.showHeaders) {
+      const hr = document.createElement("tr");
+      hr.className = "coingecko-header-row";
+
+      const vs = String(this.config.vsCurrency).toUpperCase();
+      const periodLabels = (this.config.changePeriods || []).map(p => p.toUpperCase());
+
+      hr.innerHTML = `
+        <th class="left">Coin</th
+        <th class="right">Price (${vs})</th
+        ${periodLabels.map(p => `<th class="right">${p}</th>`).join("")}
+        `;
+      table.appendChild(hr);
+    }
+
+    const periods = this.config.changePeriods || [];
+    const vs = String(this.config.vsCurrency).toUpperCase();
+
+    this.rows.forEach((r) => {
+      const tr = document.createElement("tr");
+
+      const coinCell = document.createElement("td");
+      coinCell.className = "left";
+      coincell.innerHTML = `${r.name} <span class="dimmed">(${String(r.symbol).toUpperCase()})</span>`;
+      tr.appendChild(coinCell);
+
+      const priceCell = document.createElement("td");
+      priceCell.className = "right";
+      priceCell.innerHTML = `${this.formatNumber(r.price, this.config.vsCurrency)} <span class="dimmed">${vs}</span>`;
+      tr.appendChild(priceCell);      
+
+      periods.forEach((p) => {
+        const pct = Number(r.changes?.[p]);
+        const td = document.createElement("td");
+        td.className = "right";
+
+        if (Number.isFinite(pct)) {
+          const cls = pct > 0 ? "pos" : (pct < 0 ? "neg" : "flat");
+          td.innerHTML = `<span class=:${cls}">${pct.toFixed(2)}%/span>`;
+        } else {
+          td.innerHTML = `<span class="dimmed">-</span>`;
+        }
+
+        tr.appendChild(td);
+      });
+
+      table.appendChild(tr);
+    });
+
+    wrapper.appendChild(table);
+    return wrapper;
+      
     this.rows.forEach(r => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
