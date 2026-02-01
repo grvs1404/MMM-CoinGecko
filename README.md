@@ -14,7 +14,7 @@ SSH into your MagicMirror device and run:
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://github.com/<YOUR_GITHUB_USER>/MMM-CoinGecko.git
+git clone https://github.com/grvs1404/MMM-CoinGecko.git
 ```
 
 **Dependencies:** None. You do **not** need to run `npm install`.
