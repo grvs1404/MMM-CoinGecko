@@ -1,3 +1,24 @@
-.coingecko-table { width: 100%; }
-.left { text-align: left; }
-.right { text-align: right; }
+/* Prevent wrapping (keeps rows compact) */
+.MMM-CoinGecko table,
+.MMM-CoinGecko td,
+.MMM-CoinGecko th {
+  white-space: nowrap;
+}
+
+.coingecko-table {
+  width: auto;
+  border-spacing: 0 6px;
+}
+
+.coingecko-header-row th {
+  font-weight: 700;
+  padding-bottom: 6px;
+}
+
+.left { text-align: left; padding-right: 12px; }
+.right { text-align: right; padding-left: 12px; }
+
+/* Up/down coloring */
+.pos { color: #00ff7f; font-weight: 700; }  /* green */
+.neg { color: #ff4d4d; font-weight: 700; }  /* red */
+.flat { color: #cccccc; font-weight: 700; } /* neutral */
